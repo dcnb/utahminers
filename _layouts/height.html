@@ -32,7 +32,7 @@ custom-foot: js/timeline-js.html
     {% for year in uniqueYears %}
     <tr id="{{ year }}">
         <th>
-            <h3>{{ year }}</h3>
+            <h3>{{ year }} inches</h3>
         </th>
         <td>
             <div class="row">
@@ -45,7 +45,7 @@ custom-foot: js/timeline-js.html
 {% if forloop.first %}<h5 class="mb-3 w-100">{{inYear.size}} @ {{item.height}}</h5><br/>{%endif%}
                     <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" class="m-0 p-0" style="text-decoration: none;background-color: transparent;">
                         <svg width="{{ item_weight | plus: 4 }}" height="{{ item_height | plus: 4 }}">
-                            <rect x="2" width="{{ item_weight }}" height="{{item_height}}" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.height}} | {{ item.weight }}lbs | {{item.nationality}} | | {{item.date}}" style="fill: #35915b;" />
+                            <rect x="2" width="{{ item_weight }}" height="{{item_height}}" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.height}} | {{ item.weight }}lbs | {{item.national_origin}} | | {{item.date}}" style="fill: #35915b;" />
                             Sorry, your browser does not support inline SVG.  
                           </svg>
                     </a>

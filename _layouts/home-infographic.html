@@ -13,9 +13,11 @@ layout: page
 
     {% include index/time.html %}
 
-    {% include index/featured-terms.html field="subject" title="Top Subjects" btn-color="info" featured=site.data.theme.featured-subjects max=site.data.theme.featured-subjects-max %}
+    {% include index/featured-terms.html field="national_origin" title="Top Nations" btn-color="info" max=10 %}
 
-    {% include index/featured-terms.html field="location" title="Locations" btn-color="outline-secondary" featured=site.data.theme.featured-locations max=site.data.theme.featured-locations-max %}
+    {% include index/featured-terms.html field="eyes" title="Top Eye Color" btn-color="outline-secondary" featured=site.data.theme.featured-locations max=6 %}
+
+    {% include index/featured-terms.html field="hair" title="Top Hair Color" btn-color="outline-secondary" max=6 %}
     
     {% include index/objects.html %}
 

@@ -39,8 +39,8 @@ custom-foot: js/timeline-js.html
                 {% for item in inYear %}
                 {% unless item.date contains '1900-'%}
                 
-                    <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" class="p-1 border text-center m-1">
-                    <img src="{{ item.national_origin | remove: ' ' | prepend: '/assets/flags/' | append: '.svg' | relative_url }}" style="width:28px;height:21px;" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.national_origin}} | {{item.date}}"/>
+                    <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" class="p-0 border text-center m-0">
+                    <img src="{{ item.national_origin | remove: ' ' | prepend: '/assets/flags/' | append: '.svg' | relative_url }}" style="width:40px;height:30px;" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.national_origin}} | {{item.date}}"/>
 
                     </a>
                 
