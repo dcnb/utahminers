@@ -35,12 +35,12 @@ custom-foot: js/timeline-js.html
         </th>
         <td>
             <div class="row">
-                {%- assign inYear = items | where_exp: 'item', 'item.date contains year' -%}
+                {%- assign inYear = items | where_exp: 'item', 'item.date contains year'| sort: 'national_origin' -%}
                 {% for item in inYear %}
                 {% unless item.date contains '1900-'%}
                 
                     <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" class="p-1 border text-center m-1">
-                    <img src="{{ item.national_origin | remove: ' ' | prepend: '/assets/flags/' | append: '.svg' | relative_url }}" style="width:40px;height:30px;" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.national_origin}} | {{item.date}}"/>
+                    <img src="{{ item.national_origin | remove: ' ' | prepend: '/assets/flags/' | append: '.svg' | relative_url }}" style="width:28px;height:21px;" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.national_origin}} | {{item.date}}"/>
 
                     </a>
                 
