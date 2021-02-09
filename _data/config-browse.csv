@@ -1,8 +1,8 @@
 field,display_name,btn,hidden,sort_name
-marital status,,true
-date,Date Employed,,,Date
-height,,true
-weight,Weight,true
-eyes,Eyes,true
-hair,Hair,true
 national_origin,,true
+date,Date Employed,,,Date
+height,,true,,Height
+weight,Weight,true,,Weight
+eyes,Eyes,true,,Eye Color
+hair,Hair,true,,Hair Color
+marital status,,true

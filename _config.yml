@@ -23,7 +23,7 @@ title: Kennecott Miner Records
 tagline: CB Play with U of Utah's <a href='https://github.com/marriott-library/KennecottMinerRecords'>KennecottMinerRecords repo</a>
 # description appears in meta tags and other locations
 # this description might appear in search result lists, keep around 160 characters max
-description: "This CollectionBuilder site uses  data from personnel records of miner employment at the Utah Copper Company from 1900-1919. The data building this collection was provided via a <a href='https://github.com/marriott-library/KennecottMinerRecords'>GitHub Repository</a> by <a href='https://digitalmatters.utah.edu/' target='_blank'>Digital Matters</a>, of the University of Utah. <br/<br/>The digital collection for the Kennecott Miner Records contains the original images and is available <a href='https://collections.lib.utah.edu/search?facet_setname_s=uum_kmr' target='_blank'>here</a>.
+description: "This CollectionBuilder site uses  data from personnel records of miner employment at the Utah Copper Company from 1900-1919. The data building this collection was provided via a <a href='https://github.com/marriott-library/KennecottMinerRecords'>GitHub Repository</a> by <a href='https://digitalmatters.utah.edu/' target='_blank'>Digital Matters</a>, of the University of Utah. <br/><br/>The digital collection for the Kennecott Miner Records contains the original images and is available <a href='https://collections.lib.utah.edu/search?facet_setname_s=uum_kmr' target='_blank'>here</a>.
 "
 # keywords, a short list of subjects describing the collection, separated by semicolon, to appear in rich markup
 keywords: utah;mining;university of utah;digital matters;collectionsasdata
