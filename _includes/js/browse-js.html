@@ -1,43 +1,16 @@
-{%- assign items = site.data[site.metadata] | where_exp: 'item','item.objectid' -%}
 {%- assign fields = site.data.config-browse -%}
+<script src="{{ '/assets/js/browse-items.js' | relative_url }}"></script>
 <script>
 
 function makeCard(obj) {
-    // placeholder image for lazyload
-    var placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E";
     // find item link
     var itemHref = "{{ '/items/' | relative_url }}" + obj.id + ".html";
-    // find images
-    var imgSrc, thumbSrc;
-    if(obj.img) {
-        // if there is a thumb in the csv display it
-        imgSrc = obj.img;
-    // else add a placeholder based on format
-    } else if (obj.format.includes("image")) {
-        thumbSrc = '<svg class="bi text-body" fill="currentColor"><use xlink:href="{{ "/assets/lib/bootstrap-icons.svg" | relative_url }}#{{ site.data.theme.icon-image | default: "file-image" }}"/></svg><span class="sr-only">Image File</span>';
-    } else if (obj.format.includes("audio")) {
-        thumbSrc = '<svg class="bi text-body" fill="currentColor"><use xlink:href="{{ "/assets/lib/bootstrap-icons.svg" | relative_url }}#{{ site.data.theme.icon-audio | default: "file-play" }}"/></svg><span class="sr-only">Audio File</span>';
-    } else if (obj.format.includes("video")) {
-        thumbSrc = '<svg class="bi text-body" fill="currentColor"><use xlink:href="{{ "/assets/lib/bootstrap-icons.svg" | relative_url }}#{{ site.data.theme.icon-video | default: "film" }}"/></svg><span class="sr-only">Video File</span>';
-    } else if (obj.format.includes("pdf")) {
-        thumbSrc = '<svg class="bi text-body" fill="currentColor"><use xlink:href="{{ "/assets/lib/bootstrap-icons.svg" | relative_url }}#{{ site.data.theme.icon-pdf | default: "file-richtext" }}"/></svg><span class="sr-only">Video File</span>';
-    } else {
-        thumbSrc = '<svg class="bi text-body" fill="currentColor"><use xlink:href="{{ "/assets/lib/bootstrap-icons.svg" | relative_url }}#{{ site.data.theme.icon-default | default: "file-earmark" }}"/></svg><span class="sr-only">File Icon</span>';
-    }
     // start card
-    var card = '<div class="item col-lg-4 col-md-6 col-sm-12 mb-2"><div class="card">';
-    // top image for photos
-    if(imgSrc) {
-        card += '<a href="' + itemHref + '"> <img class="card-img-top lazyload" src="' + placeholder + '" data-src="' + imgSrc + '" alt="Image of ' + obj.title + '"></a>';
-    }
+    var card = '<div class="item col-lg-4 col-md-6">';
     // title
-    card += '<div class="card-body text-center"> <h4 class="card-title"><a href="' + itemHref + '" class="text-dark">' + obj.title + '</a></h4>';
-    // thumb for non-photo items
-    if(thumbSrc){
-        card += '<p><a href="' + itemHref + '">' + thumbSrc + '</a></p>';
-    }
+    card += '<div class="border rounded p-3 m-3"> <h4><a href="' + itemHref + '" class="text-dark">' + obj.title + '</a></h4>';
     // other fields
-    card += '<p class="card-text">';
+    card += '<p>';
     {% for f in fields %}{% unless f.hidden == 'true' %}
     if(obj[{{ f.field | jsonify }}]){
     {% if f.display_name %}card += '<strong>{{ f.display_name }}:</strong> ';{% endif %}
@@ -55,30 +28,16 @@ function makeCard(obj) {
     }
     {% endunless %}{% endfor %}
     card += '</p>';
-    // media type
-    if(obj.format != "") {
-        card += '<p class="card-text"><small><a class="btn btn-sm btn-outline-secondary" href="{{ "/browse.html" | relative_url }}#' + encodeURIComponent(obj.format) + '">' + 
-        obj.format.split("/").pop().toUpperCase() + ' <svg class="bi icon-sprite"><use xlink:href="{{ "/assets/lib/bootstrap-icons.svg" | relative_url }}#';
-        if(obj.format.includes('image')){
-            card += '{{ site.data.theme.icon-image | default: "image" }}';
-        } else if(obj.format.includes('audio')){
-            card += '{{ site.data.theme.icon-audio | default: "file-play" }}';
-        } else if(obj.format.includes('video')){
-            card += '{{ site.data.theme.icon-video | default: "film" }}';
-        } else if(obj.format.includes('pdf')){
-            card += '{{ site.data.theme.icon-pdf | default: "file-richtext" }}';
-        } else {
-            card += '{{ site.data.theme.icon-default | default: "file-earmark" }}';
-        }
-        card += '"/></svg></a></small></p>';
-    }
+    
     // view button
     card += '<hr><a href="' + itemHref + '" class="btn btn-sm btn-light" title="link to ' + obj.title + '">View Full Record</a>';
     // close divs
-    card += '</div></div></div>';
+    card += '</div></div>';
     // send back big string
     return card;
 }
+
+var item_count = items.length;
 
 /* filter items function */
 function filterItems(arr,q) {
@@ -98,7 +57,7 @@ function filterItems(arr,q) {
         }
     }
     // add number 
-    $("#numberOf").html(filteredItems.length + " of {{ items | size }} items");
+    $("#numberOf").html(filteredItems.length + " of " + item_count + " items");
 
     // add stuff, make cards first in giant var, then add all at once to speed things up
     var cards = "";
@@ -123,12 +82,6 @@ function shuffle(array) {
     }
     return array;
 }
-
-/* add items */
-var items = [
-    {% for i in items %}
-    { "title":{{ i.title | strip | escape | jsonify }}, "format":{{ i.format | escape | jsonify }}, {% for f in fields %}{% if i[f.field] %}{{ f.field | escape | jsonify }}:{{ i[f.field] | strip | escape | jsonify }},{% endif %}{% endfor %}{% if i.image_thumb %} "img": {{ i.image_thumb | relative_url | jsonify }},{% endif %} "id":{{ i.objectid | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}
-];
 
 /* init browse page */
 /* randomize items once at page load */
