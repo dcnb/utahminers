@@ -1,4 +1,7 @@
-# CollectionBuilder-SA 
+This CollectionBuilder site uses  data from personnel records of miner employment at the Utah Copper Company from 1900-1919. The data building this collection was provided via a <a href='https://github.com/marriott-library/KennecottMinerRecords'>GitHub Repository</a> by <a href='https://digitalmatters.utah.edu/' target='_blank'>Digital Matters</a>, of the University of Utah. <br/><br/>The digital collection for the Kennecott Miner Records contains the original images and is available <a href='https://collections.lib.utah.edu/search?facet_setname_s=uum_kmr' target='_blank'>here</a>.
+
+
+## CollectionBuilder-SA 
 
 **Note: CollectionBuilder-SA is currently in an active development phase and my differ significantly from the main CollectionBuilder documentation, including the metadata template. Please check "docs" folder in this project for up to date information.**
 
