@@ -38,7 +38,7 @@ custom-foot: js/timeline-js.html
                 {%- assign inYear = items | where_exp: 'item', 'item.date contains year'| sort: 'national_origin' -%}
                 {% for item in inYear %}
                 {% unless item.date contains '1900-'%}
-                
+                {% if forloop.first %}<h5 class="mb-3 w-100">{{inYear.size}} employed in {{ year }}</h5><br/>{%endif%}
                     <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" class="p-0 border text-center m-0">
                     <img src="{{ item.national_origin | remove: ' ' | prepend: '/assets/flags/' | append: '.svg' | relative_url }}" style="width:40px;height:30px;" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.national_origin}} | {{item.date}}"/>
 
