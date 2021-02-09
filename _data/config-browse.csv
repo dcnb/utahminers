@@ -1,6 +1,8 @@
 field,display_name,btn,hidden,sort_name
-date,Date,,,Date
-creator,Creator,,,
-subject,,true
-location,,true
-identifier,,,true,Identifier
+marital status,,true
+date,Date Employed,,,Date
+height,,true
+weight,Weight,true
+eyes,Eyes,true
+hair,Hair,true
+national_origin,,true

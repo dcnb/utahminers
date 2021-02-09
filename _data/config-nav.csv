@@ -1,11 +1,12 @@
 display_name,stub,dropdown_parent
 Home,/,
 Browse,/browse.html,
-Subjects,/subjects.html,
-Locations,/locations.html,
-Map,/map.html,
+Nationality,/nationality.html,
+Characteristics,,
+Height-Weight Cloud,/height-weight.html,Characteristics
+Height Table,/height.html,Characteristics
+Weight Table,/weight.html,Characteristics
+Eye Color,/eyes.html,Characteristics
+Hair Color,/hair.html,Characteristics
 Timeline,/timeline.html,
 Data,/data.html,
-About,,
-About the Collection,/about.html,About
-CollectionBuilder,/tech.html,About

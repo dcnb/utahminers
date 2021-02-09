@@ -3,17 +3,16 @@ layout: page
 custom-foot: js/timeline-js.html
 ---
 {%- assign items = site.data[site.metadata] -%}
-{%- assign raw-dates = site.data[site.metadata] | map: 'date' | compact | uniq -%}
-{%- capture clean-years -%}{% for date in raw-dates %}{% if date contains "-" %}{{ date | strip | split: "-" | first }}{% elsif date contains "/" %}{{ date | strip | split: "/" | last }}{% else %}{{ date | strip }}{% endif %}{% unless forloop.last %};{% endunless %}{%- endfor -%}{%- endcapture -%}
-{%- assign uniqueYears = clean-years | remove: " " | split: ";" | uniq | sort -%}
-{%- if site.data.theme.year-navigation -%}
-{%- assign navYears = site.data.theme.year-navigation | split: ";" -%}
-{%- else -%}
+{%- capture uniqueYears -%}
+1898;1899;1900;1901;1902;1903;1904;1905;1906;1907;1908;1909;1910;1911;1912;1913;1914;1915;1916;1917;1918;1919;1920;1921;1922;1923;1924;1925
+{% endcapture %}
+{%- assign uniqueYears = uniqueYears | split: ";" -%}
 {%- capture navYears -%}
-{%- for i in uniqueYears -%}{%- assign t = i | modulo: site.data.theme.year-nav-increment -%}
-{%- if t == 0 -%}{{ i }}{% unless forloop.last %};{% endunless %}{% endif %}{% endfor %}{%- endcapture -%}
+1898;1899;1900;1901;1902;1903;1904;1905;1906;1907;1908;1909;1910;1911;1912;1913;1914;1915;1916;1917;1918;1919;1920;1921;1922;1923;1924;1925
+{% endcapture %}
 {%- assign navYears = navYears | split: ";" -%}
-{%- endif -%}
+
+
 <div class="dropdown float-right" id="year-nav">
     <button class="btn btn-info dropdown-toggle" type="button" id="yearButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Year
@@ -38,22 +37,14 @@ custom-foot: js/timeline-js.html
             <div class="row">
                 {%- assign inYear = items | where_exp: 'item', 'item.date contains year' -%}
                 {% for item in inYear %}
-                <div class="col-lg-4 col-md-6">
-                    <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" >
-                        {% if item.image_thumb or item.image_small %}
-                        <img class="lazyload img-thumbnail timeline-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.image_thumb | default: item.image_small | relative_url }}" alt="{{ item.title | escape }}" data-toggle="tooltip" data-placement="bottom" title="{{ item.title | escape }}">
-                        {% else %}
-                        <div class="card"> 
-                            <div class="card-body text-center">
-                                <div class="h5 text-dark">{{ item.title }}</div>
-                                <svg class="bi timeline-thumb text-body" fill="currentColor" aria-hidden="true">
-                                    <use xlink:href="{{ '/assets/lib/bootstrap-icons.svg' | relative_url }}#{% if item.format contains 'image' %}{{ site.data.theme.icon-image | default: 'file-image' }}{% elsif item.format contains 'audio' %}{{ site.data.theme.icon-audio | default: 'file-play' }}{% elsif item.format contains 'video' %}{{ site.data.theme.icon-video | default: 'film' }}{% elsif item.format contains 'pdf' %}{{ site.data.theme.icon-pdf | default: 'file-richtext' }}{% else %}{{ site.data.theme.icon-default | default: 'file-earmark' }}{% endif %}"/>
-                                </svg>
-                            </div>
-                        </div>
-                        {% endif %}
+                {% unless item.date contains '1900-'%}
+                
+                    <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" class="p-1 border text-center m-1">
+                    <img src="{{ item.national_origin | remove: ' ' | prepend: '/assets/flags/' | append: '.svg' | relative_url }}" style="width:40px;height:30px;" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.national_origin}} | {{item.date}}"/>
+
                     </a>
-                </div>
+                
+                {% endunless %}
                 {% endfor %}
             </div>
         </td>

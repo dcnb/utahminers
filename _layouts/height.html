@@ -1,0 +1,57 @@
+---
+layout: page
+custom-foot: js/timeline-js.html
+---
+{%- assign items = site.data[site.metadata] -%}
+{%- assign raw-dates = site.data[site.metadata] | map: 'height_inches' | compact | uniq -%}
+{%- capture clean-years -%}{% for date in raw-dates %}{% if date contains "-" %}{{ date | strip | split: "-" | first }}{% elsif date contains "/" %}{{ date | strip | split: "/" | last }}{% else %}{{ date | strip }}{% endif %}{% unless forloop.last %};{% endunless %}{%- endfor -%}{%- endcapture -%}
+{%- assign uniqueYears = clean-years | split: ";" | uniq | sort -%}
+{%- if site.data.theme.year-navigation -%}
+{%- assign navYears = site.data.theme.year-navigation | split: ";" -%}
+{%- else -%}
+{%- capture navYears -%}
+{%- for i in uniqueYears -%}{%- assign t = i | modulo: site.data.theme.year-nav-increment -%}
+{%- if t == 0 -%}{{ i }}{% unless forloop.last %};{% endunless %}{% endif %}{% endfor %}{%- endcapture -%}
+{%- assign navYears = navYears | split: ";" -%}
+{%- endif -%}
+<div class="dropdown float-right" id="year-nav">
+    <button class="btn btn-info dropdown-toggle" type="button" id="yearButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Year
+    </button>
+    <div class="dropdown-menu" aria-labelledby="yearButton">
+        {% for y in navYears %}
+        <a class="dropdown-item" href="#{{ y }}">{{ y }}</a>{% endfor %}
+    </div>
+</div>
+
+{{ content }}
+
+<h3><a href="#{{ uniqueYears | first }}">{{ uniqueYears | first }}</a> to <a href="#{{ uniqueYears | last }}">{{ uniqueYears | last }}</a></h3>
+
+<table id="timeline" class="table table-striped">
+    {% for year in uniqueYears %}
+    <tr id="{{ year }}">
+        <th>
+            <h3>{{ year }}</h3>
+        </th>
+        <td>
+            <div class="row">
+                {%- assign inYear = items | where_exp: 'item', 'item.height_inches == year' | sort: 'weight' -%}
+
+                {% for item in inYear %}
+
+                {% assign item_height = item.height_inches | times: 0.5 %}
+                {% assign item_weight = item.weight | divided_by: 4 %}
+{% if forloop.first %}<h5 class="mb-3 w-100">{{inYear.size}} @ {{item.height}}</h5><br/>{%endif%}
+                    <a href="{{ '/items/' | append: item.objectid | append: '.html' | relative_url }}" class="m-0 p-0" style="text-decoration: none;background-color: transparent;">
+                        <svg width="{{ item_weight | plus: 4 }}" height="{{ item_height | plus: 4 }}">
+                            <rect x="2" width="{{ item_weight }}" height="{{item_height}}" data-toggle="tooltip"  data-placement="bottom" title="{{item.title}} | {{item.height}} | {{ item.weight }}lbs | {{item.nationality}} | | {{item.date}}" style="fill: #35915b;" />
+                            Sorry, your browser does not support inline SVG.  
+                          </svg>
+                    </a>
+                {% endfor %}
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
