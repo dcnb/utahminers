@@ -30,10 +30,10 @@ keywords: utah;mining;university of utah;digital matters;collectionsasdata
 # creator of the digital collection, to appear in meta tags; we typically use our GitHub usernames but feel free to just use your name
 author: dcnb
 # Organization branding
-organization-name: "Digital Initiatives, University of Idaho Library"
-organization-link: https://www.lib.uidaho.edu/digital/
-organization-logo-banner: https://www.lib.uidaho.edu/media/digital/justdi_logo_sm.png
-organization-logo-nav: https://www.lib.uidaho.edu/media/digital/bannerlogo_allwhite.png
+organization-name: "Center for Digital Inquiry and Learning (CD?L)"
+organization-link: https://cdil.lib.uidaho.edu/
+organization-logo-banner: https://cdil.lib.uidaho.edu/assets/img/logo.png #https://www.lib.uidaho.edu/digital/objects/hjccc/cdil-logo.png
+organization-logo-nav: https://cdil.lib.uidaho.edu/assets/img/logo.png # https://www.lib.uidaho.edu/digital/objects/hjccc/cdil-logo.png
 
 ##########
 # COLLECTION SETTINGS
